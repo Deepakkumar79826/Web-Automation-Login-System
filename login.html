@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Organization Secure Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <form action="/login_step_1" method="POST">
+        <h2>Secure Organization Login</h2>
+        
+        {% if error %}
+        <p style="color: red;">{{ error }}</p>
+        {% endif %}
+
+        <div class="form-group">
+            <label>Username/Email:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+
+        <div class="form-group">
+            <label>Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+
+        <div class="form-group">
+            <label>Security CAPTCHA:</label>
+            <span class="captcha-box" id="captcha-display">{{ captcha_text }}</span>
+            <input type="text" id="captcha_input" name="captcha_input" placeholder="Enter Captcha here" required>
+            <input type="hidden" name="real_captcha" value="{{ captcha_text }}">
+        </div>
+
+        <div class="form-group">
+            <input type="checkbox" id="remember" name="remember">
+            <label for="remember" style="display: inline;">Remember Me</label>
+        </div>
+
+        <button type="submit" id="login-btn">Login & Send OTP</button>
+
+        <p>
+            <a href="#">Forgot Password?</a> | <a href="#">Signup</a>
+        </p>
+    </form>
+</body>
+</html>
